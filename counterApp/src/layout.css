@@ -33,18 +33,30 @@
 }
 .counterBtns {
   margin-top: 50px;
-  button {
-    margin-right: 10px;
-    background-color: blanchedalmond;
-  }
-  button:hover {
-    background-color: rgb(225, 207, 180);
-    border: 1px solid orange;
-  }
 }
 
 .counterVal {
   border: 1px solid gray;
   border-radius: 20px;
   padding: 20px;
+}
+
+.customIncrement {
+  display: flex;
+  margin-top: 10px;
+}
+.customIncrement input {
+  width: 60px;
+  margin-right: 10px;
+  border: 1px solid orange;
+  border-radius: 10px;
+}
+
+.counterBtn {
+  margin-right: 10px;
+  background-color: blanchedalmond;
+}
+.counterBtn:hover {
+  background-color: rgb(225, 207, 180);
+  border: 1px solid orange;
 }
