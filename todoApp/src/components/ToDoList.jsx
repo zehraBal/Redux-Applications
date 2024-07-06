@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTask } from "../store/actions/actions";
+import { toggleTask, removeTask } from "../store/actions/actions";
 
 export default function TodoList() {
   const dispatch = useDispatch();
@@ -9,24 +9,30 @@ export default function TodoList() {
   console.log("active:", tasks);
 
   return (
-    <ul>
-      <h6>Active Tasks</h6>
-      {tasks.map((task) => {
-        return (
-          <li key={task.id}>
-            <div>
-              <input
-                type="checkbox"
-                onChange={() => {
-                  dispatch(toggleTask(task.id));
-                }}
-              />
-              <label>{task.content}</label>
-              <button>x</button>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="tasksSection">
+      <ul className="tasks">
+        {tasks.map((task) => {
+          return (
+            <li key={task.id}>
+              <div className="activeInputSec">
+                <input
+                  type="checkbox"
+                  onChange={() => {
+                    dispatch(toggleTask(task.id));
+                  }}
+                />
+                <label>{task.content}</label>
+                <button
+                  className="destroy"
+                  onClick={() => dispatch(removeTask(task.id))}
+                >
+                  x
+                </button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }

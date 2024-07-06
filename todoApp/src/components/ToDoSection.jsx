@@ -7,7 +7,7 @@ export default function ToDoSection() {
   const show = useSelector((store) => store.show);
   console.log("show:", show);
   return (
-    <div>
+    <div className="todoSection">
       {show.all && <AllTasks />}
       {show.completed && <CompletedTasks />}
       {show.active && <TodoList />}

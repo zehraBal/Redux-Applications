@@ -1,9 +1,12 @@
 import {
   ADD_TASK,
+  REMOVE_ALL_TASK,
+  REMOVE_TASK,
   SHOW_ACTIVE,
   SHOW_ALL,
   SHOW_COMPLETED,
   TOGGLE_TASK,
+  TOGGLE_COMPLETE_TASK,
 } from "../actions/actions";
 
 const initialState = {
@@ -18,16 +21,6 @@ const initialState = {
     },
   ],
   complete: [],
-  all: [
-    {
-      id: "1",
-      content: "Learn React",
-    },
-    {
-      id: "2",
-      content: "Read a book",
-    },
-  ],
 };
 const initialShow = {
   all: true,
@@ -47,7 +40,6 @@ export const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         tasks: [...state.tasks, newTask],
-        all: [...state.all, newTask],
       };
 
     case TOGGLE_TASK:
@@ -60,6 +52,32 @@ export const todoReducer = (state = initialState, action) => {
         ...state,
         tasks: updatedTasks,
         complete: [...state.complete, item],
+      };
+    case TOGGLE_COMPLETE_TASK:
+      const it = state.complete.find((tsk) => tsk.id === action.payload);
+      if (!it) return state;
+      const updatedCompleteTasks = state.complete.filter(
+        (tsk) => tsk.id !== action.payload
+      );
+      return {
+        ...state,
+        complete: updatedCompleteTasks,
+        tasks: [...state.tasks, it],
+      };
+    case REMOVE_ALL_TASK:
+      return { ...state, complete: [] };
+
+    case REMOVE_TASK:
+      const currentTasks = state.tasks.filter(
+        (tsk) => tsk.id !== action.payload
+      );
+      const completeCurrent = state.complete.filter(
+        (tsk) => tsk.id !== action.payload
+      );
+      return {
+        ...state,
+        tasks: currentTasks,
+        complete: completeCurrent,
       };
     default:
       return state;

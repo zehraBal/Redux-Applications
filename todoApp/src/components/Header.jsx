@@ -13,8 +13,10 @@ export default function Header() {
   };
   return (
     <header className="header">
-      <h1>todos</h1>
-      <form onSubmit={formSubmit}>
+      <div className="title">
+        <h1>To Do's</h1>
+      </div>
+      <form className="headerForm" onSubmit={formSubmit}>
         <input
           type="text"
           placeholder="What needs to be done?"

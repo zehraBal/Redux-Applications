@@ -1,16 +1,8 @@
 import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import ToDoSection from "./components/ToDoSection";
+import ToDo from "./components/ToDo";
 
 function App() {
-  return (
-    <>
-      <Header />
-      <ToDoSection />
-      <Footer />
-    </>
-  );
+  return <ToDo />;
 }
 
 export default App;
