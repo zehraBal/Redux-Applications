@@ -4,3 +4,11 @@
   margin: 0;
   padding: 0;
 }
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+ul {
+  list-style: none;
+}
