@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeTask, toggleCompleteTask } from "../store/actions/actions";
+import { completeSelector } from "../store/selectors/selectors";
 
 export default function CompletedTasks() {
   const dispatch = useDispatch();
-  const CompletedTasks = useSelector((store) => store.todo.complete);
+  const CompletedTasks = useSelector(completeSelector);
   return (
     <div className="tasksSection">
       <ul className="tasks">

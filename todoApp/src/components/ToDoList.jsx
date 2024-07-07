@@ -1,11 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTask, removeTask } from "../store/actions/actions";
+import { tasksSelector } from "../store/selectors/selectors";
 
 export default function TodoList() {
   const dispatch = useDispatch();
-  const tasks = useSelector((store) => {
-    return store.todo.tasks;
-  });
+  const tasks = useSelector(tasksSelector);
   console.log("active:", tasks);
 
   return (

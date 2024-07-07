@@ -5,12 +5,17 @@ import {
   showAll,
   showCompleted,
 } from "../store/actions/actions";
+import {
+  completeSelector,
+  showSelector,
+  tasksSelector,
+} from "../store/selectors/selectors";
 
 export default function Footer() {
   const dispatch = useDispatch();
-  const show = useSelector((store) => store.show);
-  const tasks = useSelector((store) => store.todo.tasks);
-  const completedTasks = useSelector((store) => store.todo.complete);
+  const show = useSelector(showSelector);
+  const tasks = useSelector(tasksSelector);
+  const completedTasks = useSelector(completeSelector);
   const activeCount = tasks.length;
   const completedCount = completedTasks.length;
   const allCount = activeCount + completedCount;
