@@ -8,6 +8,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const formSubmit = (e) => {
     e.preventDefault();
+    if (!newTask) return;
     dispatch(addTask(newTask));
     setNewTask("");
   };
