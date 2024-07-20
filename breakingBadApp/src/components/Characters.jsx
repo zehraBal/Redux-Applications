@@ -20,8 +20,8 @@ export default function Characters({ character, keyNum }) {
                   alt={char.name}
                 />
               </div>
-              <div className="flex flex-wrap">
-                <span className="text-lg font-medium text-slate-950">
+              <div className="flex flex-wrap items-center justify-center ">
+                <span className="text-lg font-medium text-slate-950 r">
                   {char.name}
                 </span>
               </div>

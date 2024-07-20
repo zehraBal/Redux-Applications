@@ -4,16 +4,16 @@ import {
   FETCH_NEXT_PAGE,
   GET_CHARACTERS,
   HAS_NEXT_PAGE,
-} from "../actions/actions";
+} from "../actions/charActions";
 
-const initialState = {
+const initialCharacter = {
   characters: [],
   isLoading: false,
   error: null,
   page: 2,
   hasNext: true,
 };
-export const characterReducer = (state = initialState, action) => {
+export const characterReducer = (state = initialCharacter, action) => {
   switch (action.type) {
     case GET_CHARACTERS:
       return {

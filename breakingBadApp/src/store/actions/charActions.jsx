@@ -24,6 +24,7 @@ export const fetchCharactersFailure = (error) => {
 export const hasNextPage = () => {
   return { type: HAS_NEXT_PAGE };
 };
+
 export const fetchCharacters = () => (dispatch) => {
   dispatch(fetchCharactersRequest());
   axios

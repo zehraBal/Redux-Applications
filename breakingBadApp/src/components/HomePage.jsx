@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCharacters, fetchNextPage } from "../store/actions/actions";
+import { fetchCharacters, fetchNextPage } from "../store/actions/charActions";
 import Characters from "./Characters";
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const characters = useSelector((store) => store.characters);
-  const isLoading = useSelector((store) => store.isLoading);
-  const isError = useSelector((store) => store.error);
-  const nextPage = useSelector((store) => store.page);
-  const hasNextPage = useSelector((store) => store.hasNext);
+  const characters = useSelector((store) => store.stars.characters);
+  const isLoading = useSelector((store) => store.stars.isLoading);
+  const isError = useSelector((store) => store.stars.error);
+  const nextPage = useSelector((store) => store.stars.page);
+  const hasNextPage = useSelector((store) => store.stars.hasNext);
 
   useEffect(() => {
     dispatch(fetchCharacters());
