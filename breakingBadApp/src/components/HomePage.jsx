@@ -26,19 +26,28 @@ export default function HomePage() {
   console.log(characters);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6">
+    <div className="flex flex-col items-center justify-center gap-6 bg-slate-100 dark:bg-slate-900 ">
+      <div className="py-14">
+        {" "}
+        <h1 className="font-bold text-8xl leading-10 text-slate-900 dark:text-slate-300 ">
+          CHARACTERS
+        </h1>
+      </div>
       <Characters character={characters} />
-      <div>
-        {isLoading && <div>Loading...</div>}
+      <div className="mt-5">
         {hasNextPage && (
           <button
+            className="py-5 px-3 border-solid border-slate-600 bg-slate-300 border-2 rounded-lg text-slate-600 dark:bg-slate-500 dark:text-slate-200"
             onClick={handleViewMore}
-            className="h-8 w-24 border-x-2 border-solid rounded-xl border-black bg-slate-500"
           >
-            View More...
+            View more characters
           </button>
         )}
-        {!hasNextPage && <div>Nothing left to show </div>}
+        {!hasNextPage && (
+          <span className="py-5 px-3 border-solid border-slate-600 bg-slate-300 border-2 rounded-lg text-slate-600  dark:bg-slate-500 dark:text-slate-200">
+            Nothing left to show{" "}
+          </span>
+        )}
       </div>
     </div>
   );

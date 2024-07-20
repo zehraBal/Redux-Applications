@@ -10,7 +10,7 @@ export default function Characters({ character, keyNum }) {
         return (
           <div
             key={char.id}
-            className="w-60 h-72 border-solid border-slate-600 rounded-lg border-2 flex flex-col items-center justify-evenly shadow-lg bg-slate-200"
+            className="w-60 h-72 border-solid border-slate-600 rounded-lg border-2 flex flex-col items-center justify-evenly shadow-lg bg-slate-200 dark:bg-slate-500 "
           >
             <Link to={`/details/${char.id}`}>
               <div className="w-52 h-52 ">

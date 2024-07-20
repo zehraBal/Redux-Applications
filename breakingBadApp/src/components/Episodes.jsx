@@ -28,7 +28,13 @@ export default function Episodes() {
     dispatch(fetchNextEpisodes(pageNum));
   };
   return (
-    <div className="w-svw flex flex-col  items-center justify-center">
+    <div className="w-svw flex flex-col bg-slate-100 items-center justify-center dark:bg-slate-900">
+      <div className="py-14">
+        {" "}
+        <h1 className="font-bold text-8xl leading-10 text-slate-900  dark:text-slate-200">
+          EPISODES
+        </h1>
+      </div>
       {episodes.map((ep) => {
         const characters = getCharacterDataByEpisode(ep);
         const ssn = ep.episode.split("");
@@ -41,9 +47,9 @@ export default function Episodes() {
         return (
           <div
             key={ep.id}
-            className="w-[580px] min-h-[250px] flex flex-col m-4 justify-between border-solid border-slate-600 bg-slate-200 border-2 rounded-lg"
+            className="w-[580px] min-h-[250px] flex flex-col m-4 justify-between border-solid border-slate-600 bg-slate-200 border-2 rounded-lg dark:bg-slate-500"
           >
-            <div className="flex items-center justify-start p-4 border-solid border-b-2 border-slate-500">
+            <div className="flex items-center justify-start p-4 border-solid border-b-2 border-slate-600">
               <h2 className="text-2xl font-bold ">{ep.name}</h2>
             </div>
             <div className="flex justify-between ">
@@ -58,11 +64,11 @@ export default function Episodes() {
                   AIR DATE: {ep.air_date}
                 </span>
               </div>
-              <div className="max-w-[300px]  flex flex-wrap m-4 items-center gap-1  border-solid border-[1px] p-2   border-slate-500 rounded-lg">
+              <div className="max-w-[300px]  flex flex-wrap m-4 items-center gap-1  border-solid border-[1px] p-2   border-slate-600 rounded-lg">
                 {characters.map((char) => (
                   <div
                     key={char.id}
-                    className="border-solid border-[1px] border-slate-500 rounded-lg p-1"
+                    className="border-solid border-[1px] border-slate-600 rounded-lg p-1"
                   >
                     <Link to={`/details/${char.id}`}>
                       <img
@@ -85,14 +91,14 @@ export default function Episodes() {
       <div className="mt-5">
         {hasNext && (
           <button
-            className="py-5 px-3 border-solid border-slate-600 bg-slate-500 border-2 rounded-lg text-slate-200"
+            className="py-5 px-3 border-solid border-slate-600 bg-slate-300 border-2 rounded-lg text-slate-600  dark:bg-slate-500 dark:text-slate-200"
             onClick={handleClick}
           >
             View more episodes
           </button>
         )}
         {!hasNext && (
-          <span className="py-5 px-3 border-solid border-slate-600 bg-slate-500 border-2 rounded-lg text-slate-200 ">
+          <span className="py-5 px-3 border-solid border-slate-600 bg-slate-300 border-2 rounded-lg text-slate-600  dark:bg-slate-500 dark:text-slate-200">
             Nothing left to show{" "}
           </span>
         )}
