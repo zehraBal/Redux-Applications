@@ -29,7 +29,6 @@ export const DarkModeSwitch = () => {
       darkModeSec.classList.add("dark");
       footer.classList.add("dark");
 
-      // Dinamik olarak güncellenen elemanlara dark mode ekleme
       tasks.forEach((task) => task.classList.add("dark"));
     } else {
       app.classList.remove("darkApp");
@@ -40,7 +39,6 @@ export const DarkModeSwitch = () => {
       darkModeSec.classList.remove("dark");
       footer.classList.remove("dark");
 
-      // Dinamik olarak güncellenen elemanlardan dark mode class'ını kaldır
       tasks.forEach((task) => task.classList.remove("dark"));
     }
   }, [theme]);
