@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../store/actions/actions";
+import { DarkModeSwitch } from "./DarkModeSwitch";
 
 export default function Header() {
   const [newTask, setNewTask] = useState("");
@@ -14,8 +15,12 @@ export default function Header() {
   };
   return (
     <header className="header">
-      <div className="title">
-        <h1>To Do's</h1>
+      <div className="headerTitleSec">
+        <div className="title">
+          <h1>To Do's</h1>
+        </div>
+
+        <DarkModeSwitch />
       </div>
       <form className="headerForm" onSubmit={formSubmit}>
         <input

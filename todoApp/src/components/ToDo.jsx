@@ -5,9 +5,11 @@ import ToDoSection from "./ToDoSection";
 export default function ToDo() {
   return (
     <div className="app">
-      <Header />
-      <ToDoSection />
-      <Footer />
+      <div className="todoApp">
+        <Header />
+        <ToDoSection />
+        <Footer />
+      </div>
     </div>
   );
 }

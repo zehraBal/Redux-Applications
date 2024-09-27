@@ -1,27 +1,50 @@
 import { useEffect, useState } from "react";
 
 export const DarkModeSwitch = () => {
-  const [theme, setTheme] = useState("");
+  // Kullanıcının tercih ettiği temayı localStorage'dan alıyoruz
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "");
+
   const handleChange = (e) => {
-    setTheme(e.target.checked ? "dark" : "");
+    const selectedTheme = e.target.checked ? "dark" : "";
+    setTheme(selectedTheme);
+    // Temayı localStorage'a kaydediyoruz
+    localStorage.setItem("theme", selectedTheme);
   };
   useEffect(() => {
     const root = document.getElementById("root");
-    const app = document.getElementsByClassName("app")[0]; // HTMLCollection'dan ilk elementi seçin
-    const head = document.getElementsByClassName("title")[0];
-    const tasks = document.getElementsByClassName("tasks")[0];
+    const app = document.querySelector(".app");
+    const head = document.querySelector(".title");
+    const tasks = document.querySelectorAll(".tasks, .tasksSection li, input");
+    const headerSec = document.querySelector(".todoApp");
+    const header = document.querySelector(".header");
+    const darkModeSec = document.querySelector(".container-switch");
+    const footer = document.querySelector(".footer");
+
     if (theme === "dark") {
-      app.classList.add("dark"); // Dark tema ise 'dark' class'ını ekle
+      app.classList.add("darkApp");
       root.classList.add("dark");
       head.classList.add("dark");
-      tasks.classList.add("dark");
+      headerSec.classList.add("dark");
+      header.classList.add("dark");
+      darkModeSec.classList.add("dark");
+      footer.classList.add("dark");
+
+      // Dinamik olarak güncellenen elemanlara dark mode ekleme
+      tasks.forEach((task) => task.classList.add("dark"));
     } else {
-      app.classList.remove("dark"); // Dark tema değilse 'dark' class'ını kaldır
+      app.classList.remove("darkApp");
       root.classList.remove("dark");
       head.classList.remove("dark");
-      tasks.classList.remove("dark");
+      headerSec.classList.remove("dark");
+      header.classList.remove("dark");
+      darkModeSec.classList.remove("dark");
+      footer.classList.remove("dark");
+
+      // Dinamik olarak güncellenen elemanlardan dark mode class'ını kaldır
+      tasks.forEach((task) => task.classList.remove("dark"));
     }
   }, [theme]);
+
   return (
     <div className="container-switch">
       <span>Change Theme</span>

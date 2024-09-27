@@ -1,20 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-#root {
-  width: 100vw;
+* {
   margin: 0;
   padding: 0;
   font-family: "Shadows Into Light";
-  font-size: large;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(220, 226, 232);
 }
-
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+.todoApp {
+  width: 500px;
+  max-height: 600px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}
 .completed label {
   text-decoration: line-through;
   color: gray;
@@ -25,19 +23,33 @@ ul {
 }
 
 .app {
-  width: 500px;
-  min-height: 600px;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
 }
-
+.headerTitleSec {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .header {
   min-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 0;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  border: 1px solid rgb(177, 176, 176);
 }
 .headerForm input {
   font-family: "Shadows Into Light";
@@ -47,21 +59,27 @@ ul {
   border: 1px solid rgb(177, 176, 176);
   border-radius: 5px;
 }
-.title,
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}
 .headerForm {
   display: flex;
   justify-content: center;
-  width: 500px;
   background-color: rgb(220, 226, 232);
 }
 .tasksSection {
-  background-color: aliceblue;
+  background-color: #f5f5f5;
   width: 500px;
   margin: 0;
   padding: 0;
 }
 .tasks {
-  background-color: aliceblue;
+  background-color: #f5f5f5;
 }
 
 .footer {
@@ -70,7 +88,7 @@ ul {
 
   margin: 0;
   color: gray;
-  background-color: aliceblue;
+  background-color: #e0e0e0;
   width: 500px;
   display: flex;
   justify-content: space-between;
@@ -168,18 +186,16 @@ ul {
 .container-switch {
   display: flex;
   align-items: center;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  background-color: rgb(220, 226, 232);
+  justify-content: space-around;
+  width: 200px;
+  background-color: #e0e0e0;
 }
 
 .switch {
   margin-left: 10px;
   position: relative;
   display: inline-block;
-  width: 34px;
+  width: 35px;
   height: 20px;
 }
 
@@ -196,9 +212,10 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: white;
   transition: 0.4s;
   border-radius: 34px;
+  border: 1px solid gray;
 }
 
 .slider:before {
@@ -207,21 +224,32 @@ ul {
   height: 14px;
   width: 14px;
   left: 3px;
-  bottom: 3px;
-  background-color: white;
+  bottom: 2px;
+  background-color: #333333;
   transition: 0.4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: #333333;
 }
 
 input:checked + .slider:before {
+  background-color: #bfbfbf;
   transform: translateX(14px);
 }
 
 .dark {
-  background-color: black;
-  color: wheat;
+  background-color: #333333;
+  color: #bfbfbf;
+}
+
+.darkApp {
+  background-color: #6c6c6c;
+  color: #bfbfbf;
+}
+
+.darkList {
+  background-color: #3f3f3f;
+  color: #bfbfbf;
 }

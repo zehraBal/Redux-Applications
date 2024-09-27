@@ -4,8 +4,7 @@ import ToDo from "./components/ToDo";
 
 function App() {
   return (
-    <div>
-      <DarkModeSwitch />
+    <div className="todoApp">
       <ToDo />
     </div>
   );
