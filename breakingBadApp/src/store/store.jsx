@@ -1,15 +1,16 @@
-import {
-  applyMiddleware,
-  combineReducers,
-  legacy_createStore as createStore,
-} from "redux";
-import { thunk } from "redux-thunk";
-import { characterReducer } from "./reducers/characterReducer";
-import { episodeReducer } from "./reducers/episodeReducer";
-import { locateReducer } from "./reducers/locateReducer";
-const rootReducer = combineReducers({
-  stars: characterReducer,
-  shows: episodeReducer,
-  locate: locateReducer,
+import { configureStore } from "@reduxjs/toolkit";
+import { rickMortyApi } from "./services/apiSlice";
+import filtersReducer from "./slices/filtersSlice";
+import uiReducer from "./slices/uiSlice";
+import charactersReducer from "./slices/characterSlice";
+
+export const store = configureStore({
+  reducer: {
+    [rickMortyApi.reducerPath]: rickMortyApi.reducer,
+    filters: filtersReducer,
+    ui: uiReducer,
+    characters: charactersReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(rickMortyApi.middleware),
 });
-export const store = createStore(rootReducer, applyMiddleware(thunk));
