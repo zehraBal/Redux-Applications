@@ -1,4 +1,12 @@
 /*
+
+// LEGACY REDUX CODE - preserved 2023-11-30 during migration
+// Reason for keeping:
+// 1. Reference during transition period
+// 2. Potential rollback needs
+// 3. Historical behavior documentation
+// TODO: Remove after 2024-01-31 if no longer needed
+
 import axios from "axios";
 export const GET_CHARACTERS = "GET_CHARACTERS";
 export const FETCH_NEXT_PAGE = "FETCH_NEXT_PAGE";
