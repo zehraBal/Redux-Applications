@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useGetCharactersQuery } from "../store/services/apiSlice"; // API'den karakter verilerini almak için
-import { setCharacterFilter } from "../store/slices/filtersSlice"; // Karakter filtrelerini ayarlamak için
-import { FilterPanel } from "./FilterPanel"; // FilterPanel bileşenini içe aktar
-import { useEffect, useState } from "react"; // useState'i içe aktar
+import { useGetCharactersQuery } from "../store/services/apiSlice";
+import { setCharacterFilter } from "../store/slices/filtersSlice";
+import { FilterPanel } from "./FilterPanel";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import LoadingSpinner from "./LoadingSpinner"; // Yükleniyor spinner bileşeni
-import ErrorMessage from "./ErrorMessage"; // Hata mesajı bileşeni
+import LoadingSpinner from "./LoadingSpinner";
+import ErrorMessage from "./ErrorMessage";
 
 export default function Characters() {
   const dispatch = useDispatch();
@@ -54,7 +54,8 @@ export default function Characters() {
         </h1>
       </div>
 
-      {/* Filtre Paneli */}
+      {/*Filter Panel */}
+
       <FilterPanel
         filters={characterFilters}
         onFiltersChange={handleFilterChange}
@@ -62,7 +63,8 @@ export default function Characters() {
         onToggle={() => setIsFilterOpen(!isFilterOpen)}
       />
 
-      {/* Karakter Listesi */}
+      {/*Character Card */}
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full">
         {allCharacters.map((char) => (
           <Link
@@ -87,7 +89,8 @@ export default function Characters() {
         ))}
       </div>
 
-      {/* Sayfalama Butonu */}
+      {/* Pagination */}
+
       <div className="mt-4">
         {currentPageData?.info?.next ? (
           <button
