@@ -46,7 +46,6 @@ export default function Details() {
 
   return (
     <div className="min-h-screen bg-gray-50/50 dark:bg-gray-900/50 p-6 flex flex-col items-center">
-      {/* Başlık */}
       <div className="mb-8 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
           CHARACTER DETAILS
@@ -54,18 +53,17 @@ export default function Details() {
         <div className="w-20 h-1 bg-green-500 mx-auto rounded-full" />
       </div>
 
-      {/* Karakter Kartı */}
+      {/* Character Detail Card */}
       <div className="w-full max-w-4xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700/50 overflow-hidden shadow-lg">
-        {/* Üst Bilgi */}
         <div className="border-b border-gray-200 dark:border-gray-700/50 p-6">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
             {char.name}
           </h2>
         </div>
 
-        {/* İçerik */}
+        {/* Content */}
         <div className="flex flex-col md:flex-row">
-          {/* Resim ve Temel Bilgiler */}
+          {/*Character image and name */}
           <div className="md:w-1/3 p-6 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700/50">
             <div className="relative aspect-square mb-4 rounded-lg overflow-hidden">
               <img
@@ -104,7 +102,7 @@ export default function Details() {
             </div>
           </div>
 
-          {/* Detaylı Bilgiler */}
+          {/*Details */}
           <div className="md:w-2/3 p-6">
             <div className="space-y-6">
               <div>
@@ -131,7 +129,7 @@ export default function Details() {
                 </h3>
                 <ul className="list-disc pl-5 text-gray-900 dark:text-white">
                   {firstFiveEpisodes.map((episodeUrl, index) => {
-                    const episodeId = episodeUrl.split("/").pop(); // URL'den episode ID'sini al
+                    const episodeId = episodeUrl.split("/").pop();
                     return <li key={index}>Episode {episodeId}</li>;
                   })}
                   {remainingEpisodesCount > 0 && (
