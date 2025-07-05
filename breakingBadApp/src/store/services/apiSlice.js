@@ -58,7 +58,13 @@ export const rickMortyApi = createApi({
       query: (id) => `/episode/${id}`,
       providesTags: (result, error, id) => [{ type: "Episodes", id }],
     }),
-
+    getMultipleEpisodes: builder.query({
+      query: (ids) => `/episode/${ids.join(",")}`,
+      transformResponse: (response) =>
+        Array.isArray(response) ? response : [response],
+      providesTags: (result) =>
+        result?.map(({ id }) => ({ type: "Episodes", id })) || [],
+    }),
     // Get Multiple Characters
     getMultipleCharacters: builder.query({
       query: (ids) => `/character/${ids.join(",")}`,
@@ -67,7 +73,13 @@ export const rickMortyApi = createApi({
       providesTags: (result) =>
         result?.map(({ id }) => ({ type: "Characters", id })) || [],
     }),
-  }), // endpoints fonksiyonunun kapanışı
+    getCharacterEpisodes: builder.query({
+      query: (characterId) => `/character/${characterId}`,
+      transformResponse: (character) => character.episode,
+    }),
+  }),
+
+  // endpoints fonksiyonunun kapanışı
 });
 
 // Export hooks
@@ -81,4 +93,6 @@ export const {
   useLazyGetEpisodesQuery,
   useGetEpisodeByIdQuery,
   useGetMultipleCharactersQuery,
+  useGetMultipleEpisodesQuery,
+  useGetCharacterEpisodesQuery,
 } = rickMortyApi;
