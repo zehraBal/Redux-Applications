@@ -1,3 +1,4 @@
+/*
 import {
   FETCH_EPISODES_FAILURE,
   FETCH_EPISODES_NEXT,
@@ -37,3 +38,4 @@ export const episodeReducer = (state = initialEpisode, action) => {
       return state;
   }
 };
+*/

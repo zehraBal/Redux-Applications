@@ -1,3 +1,4 @@
+/*
 import {
   FETCH_CHARACTERS_FAILURE,
   FETCH_CHARACTERS_REQUEST,
@@ -39,3 +40,4 @@ export const characterReducer = (state = initialCharacter, action) => {
       return state;
   }
 };
+*/

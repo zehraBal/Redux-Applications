@@ -1,3 +1,4 @@
+/*
 import axios from "axios";
 export const GET_LOCATIONS = "GET_LOCATIONS";
 export const HAS_NEXT_LOCATION = "HAS_NEXT_LOCATION";
@@ -52,3 +53,4 @@ export const fetchNextLocations = (page) => (dispatch) => {
       dispatch(fetchLocationsFailure(err.message));
     });
 };
+*/

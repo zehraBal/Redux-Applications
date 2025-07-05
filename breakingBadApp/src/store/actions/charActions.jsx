@@ -1,3 +1,4 @@
+/*
 import axios from "axios";
 export const GET_CHARACTERS = "GET_CHARACTERS";
 export const FETCH_NEXT_PAGE = "FETCH_NEXT_PAGE";
@@ -54,3 +55,4 @@ export const fetchNextPage = (page) => (dispatch) => {
       dispatch(fetchCharactersFailure(err.message));
     });
 };
+*/

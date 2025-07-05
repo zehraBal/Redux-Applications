@@ -1,3 +1,4 @@
+/*
 import {
   FETCH_LOCATIONS_FAILURE,
   FETCH_LOCATIONS_NEXT,
@@ -38,3 +39,4 @@ export const locateReducer = (state = initialLocation, action) => {
       return state;
   }
 };
+*/
