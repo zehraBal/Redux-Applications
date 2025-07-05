@@ -30,39 +30,37 @@ export const EpisodeCard = ({ episode }) => {
         </div>
       </div>
 
-      {episode.characterDetails && episode.characterDetails.length > 0 && (
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-            Featured Characters
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {episode.characterDetails.slice(0, 6).map((character) => (
-              <div
-                key={character.id}
-                className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-2"
-              >
-                <img
-                  src={character.image}
-                  alt={character.name}
-                  className="w-8 h-8 rounded-full object-cover"
-                />
-                <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">
-                  {character.name.length > 12
-                    ? `${character.name.substring(0, 12)}...`
-                    : character.name}
-                </span>
-              </div>
-            ))}
-            {episode.characterDetails.length > 6 && (
-              <div className="flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg p-2 min-w-[60px]">
-                <span className="text-xs text-gray-500 dark:text-gray-400">
-                  +{episode.characterDetails.length - 6}
-                </span>
-              </div>
-            )}
-          </div>
+      {/* Characters */}
+      <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          Featured Characters
+        </h4>
+        <div className="flex flex-wrap gap-2">
+          {episode.characterDetails?.slice(0, 5).map((character) => (
+            <div
+              key={character.id}
+              className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-2"
+              title={character.name}
+            >
+              <img
+                src={character.image}
+                alt={character.name}
+                className="w-8 h-8 rounded-full object-cover"
+              />
+              <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">
+                {character.name.split(" ")[0]}
+              </span>
+            </div>
+          ))}
+          {episode.characterDetails?.length > 5 && (
+            <div className="flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg p-2 min-w-[40px]">
+              <span className="text-xs text-gray-500 dark:text-gray-400">
+                +{episode.characterDetails.length - 5}
+              </span>
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
       <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between">
