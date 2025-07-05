@@ -1,9 +1,19 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { Heart, HelpCircle, Skull } from "lucide-react";
+import LoadingSpinner from "./LoadingSpinner";
+import ErrorMessage from "./ErrorMessage";
+import { useGetCharacterByIdQuery } from "../store/services/apiSlice";
 
 export default function Details() {
+  const { char_id } = useParams();
+
+  const {
+    data: char,
+    isLoading,
+    isError,
+    error,
+  } = useGetCharacterByIdQuery(char_id);
+
   const getStatusIcon = (status) => {
     switch (status) {
       case "Alive":
@@ -26,32 +36,13 @@ export default function Details() {
     }
   };
 
-  const { char_id } = useParams();
-  const [char, setChar] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorMessage />;
 
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`https://rickandmortyapi.com/api/character/${char_id}`)
-      .then((res) => {
-        setChar(res.data);
-        setLoading(false);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        setError(err);
-        setLoading(false);
-        console.warn(err);
-      });
-  }, [char_id]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error loading character details</div>;
-
-  console.log("char_id", char_id);
-  console.log("char", char);
+  // İlk 5 bölüm ve geri kalan bölümleri hesapla
+  const episodeCount = char.episode?.length || 0;
+  const firstFiveEpisodes = char.episode?.slice(0, 5) || [];
+  const remainingEpisodesCount = episodeCount > 5 ? episodeCount - 5 : 0;
 
   return (
     <div className="min-h-screen bg-gray-50/50 dark:bg-gray-900/50 p-6 flex flex-col items-center">
@@ -64,7 +55,7 @@ export default function Details() {
       </div>
 
       {/* Karakter Kartı */}
-      <div className="w-full max-w-4xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700/50 overflow-hidden shadow-2xl">
+      <div className="w-full max-w-4xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700/50 overflow-hidden shadow-lg">
         {/* Üst Bilgi */}
         <div className="border-b border-gray-200 dark:border-gray-700/50 p-6">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
@@ -138,9 +129,15 @@ export default function Details() {
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Episodes
                 </h3>
-                <p className="text-gray-900 dark:text-white">
-                  {char.episode?.length} episodes
-                </p>
+                <ul className="list-disc pl-5 text-gray-900 dark:text-white">
+                  {firstFiveEpisodes.map((episodeUrl, index) => {
+                    const episodeId = episodeUrl.split("/").pop(); // URL'den episode ID'sini al
+                    return <li key={index}>Episode {episodeId}</li>;
+                  })}
+                  {remainingEpisodesCount > 0 && (
+                    <li>+{remainingEpisodesCount} more episodes</li>
+                  )}
+                </ul>
               </div>
             </div>
           </div>
