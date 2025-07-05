@@ -1,8 +1,18 @@
-// FilterPanel.jsx
-import React from "react";
 import { Filter, X } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export const FilterPanel = ({ filters, onFiltersChange, isOpen, onToggle }) => {
+  const location = useLocation();
+
+  const activeTab =
+    location.pathname === "/"
+      ? "characters"
+      : location.pathname === "/locations"
+      ? "locations"
+      : location.pathname === "/episodes"
+      ? "episodes"
+      : null;
+
   const handleFilterChange = (key, value) => {
     onFiltersChange({
       ...filters,
@@ -16,6 +26,116 @@ export const FilterPanel = ({ filters, onFiltersChange, isOpen, onToggle }) => {
 
   const hasActiveFilters = Object.values(filters).some(
     (value) => value !== undefined
+  );
+
+  const renderCharacterFilters = () => (
+    <>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Status
+        </label>
+        <select
+          value={filters.status || ""}
+          onChange={(e) => handleFilterChange("status", e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        >
+          <option value="">All Status</option>
+          <option value="alive">Alive</option>
+          <option value="dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Species
+        </label>
+        <input
+          type="text"
+          placeholder="e.g., Human, Alien"
+          value={filters.species || ""}
+          onChange={(e) => handleFilterChange("species", e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Gender
+        </label>
+        <select
+          value={filters.gender || ""}
+          onChange={(e) => handleFilterChange("gender", e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        >
+          <option value="">All Genders</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="genderless">Genderless</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+    </>
+  );
+
+  const renderLocationFilters = () => (
+    <>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Type
+        </label>
+        <input
+          type="text"
+          placeholder="e.g., Planet, Space station"
+          value={filters.type || ""}
+          onChange={(e) => handleFilterChange("type", e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Dimension
+        </label>
+        <input
+          type="text"
+          placeholder="e.g., Dimension C-137"
+          value={filters.dimension || ""}
+          onChange={(e) => handleFilterChange("dimension", e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
+      </div>
+    </>
+  );
+
+  const renderEpisodeFilters = () => (
+    <>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Episode Name
+        </label>
+        <input
+          type="text"
+          placeholder="e.g., Episode Name"
+          value={filters.episodeName || ""}
+          onChange={(e) => handleFilterChange("episodeName", e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Season
+        </label>
+        <input
+          type="text"
+          placeholder="e.g., Season 1"
+          value={filters.season || ""}
+          onChange={(e) => handleFilterChange("season", e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
+      </div>
+    </>
   );
 
   return (
@@ -37,7 +157,7 @@ export const FilterPanel = ({ filters, onFiltersChange, isOpen, onToggle }) => {
         <div className="mt-4 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Filter
+              Filter {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
             </h3>
             <div className="flex items-center space-x-2">
               {hasActiveFilters && (
@@ -57,32 +177,10 @@ export const FilterPanel = ({ filters, onFiltersChange, isOpen, onToggle }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., Episode Name"
-                value={filters.name || ""}
-                onChange={(e) => handleFilterChange("name", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Episode
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., S01E01"
-                value={filters.episode || ""}
-                onChange={(e) => handleFilterChange("episode", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {activeTab === "characters" && renderCharacterFilters()}
+            {activeTab === "locations" && renderLocationFilters()}
+            {activeTab === "episodes" && renderEpisodeFilters()}
           </div>
         </div>
       )}
