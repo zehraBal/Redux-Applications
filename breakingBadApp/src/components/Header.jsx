@@ -1,9 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { Search, Sun, Moon, Users, Tv, MapPin } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { setCharacterFilter, setActiveTab } from "../store/slices/filtersSlice";
+import {
+  setCharacterFilter,
+  setLocationFilter,
+  setEpisodeFilter,
+  setActiveTab,
+} from "../store/slices/filtersSlice";
 import { useSelector } from "react-redux";
 import { toggleTheme } from "../store/slices/uiSlice";
+import { useEffect } from "react";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -12,9 +18,22 @@ export default function Header() {
   const activeTab = useSelector((state) => state.filters.activeTab);
 
   const handleSearch = (value) => {
-    dispatch(setCharacterFilter({ name: value }));
+    if (location.pathname === "/") {
+      dispatch(setCharacterFilter({ name: value }));
+    } else if (location.pathname === "/locations") {
+      dispatch(setLocationFilter({ name: value }));
+    } else if (location.pathname === "/episodes") {
+      dispatch(setEpisodeFilter({ name: value }));
+    }
   };
 
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
   const handleThemeToggle = () => {
     dispatch(toggleTheme());
   };
@@ -45,7 +64,7 @@ export default function Header() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
-                  placeholder="Search characters..."
+                  placeholder="Search..."
                   onChange={(e) => handleSearch(e.target.value)}
                   className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:border-green-500 focus:ring-1 focus:ring-green-500 focus:outline-none transition-colors w-64"
                 />
